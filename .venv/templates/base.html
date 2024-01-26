@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDo App: Manage Your Life Better</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.css">
+<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.js"></script>
+</head>
+<body>
+    <div style="margin-top: 50px"; class = "ui container">
+    <h1 class = "ui center aligned header">ToDo or : Manage Your Life Better</h1>
+    <p class="instructions">Let us help you manage your life better! Enter your tasks in the list below. Check the mark complete box when you have completed a task and use the 
+        checklist to keep track of all ongoing tasks. When you have finished a task, you can delete it from your list by clicking remove task. Get ready to be productive!
+    </p>
+    <form class="ui form" action="/add" method="POST">
+        <div class="field">
+            <label for="title">To Do Title</label>
+            <input type="text" name="title" placeholder="Enter your tasks here">
+            <br>
+            <br>
+            <button class= "ui blue button" type="submit">New Task</button>
+        </div>
+
+    </form>
+
+    {% for todo in todo_list%}
+    <div class="ui segment">
+        <p class="ui big header"> {{ todo.id}} | {{ todo.title}}</p>
+        {% if todo.complete == False%}
+            <span class = "ui red label">x</span>
+        {% else %}
+            <span class = "ui green label">✓</span>
+        {% endif %}
+
+        <a class = "ui grey button" href="/update/{{ todo.id}}">Mark Complete</a>
+        <a class = "ui grey button" href="/delete/{{ todo.id}}">Remove Task</a>
+    </div>
+    {% endfor %}
+    </div>
+</body>
+</html>
